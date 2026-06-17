@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .invoice-info {
+            margin-bottom: 25px;
+        }
+
+        .invoice-info p {
+            margin: 6px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #000;
+        }
+
+        th {
+            background-color: #f3f3f3;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .total {
+            margin-top: 20px;
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .invoice-number {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>INVOICE</h1>
+
+    <div class="invoice-number">
+        <strong>Invoice #{{ invoice.id }}</strong>
+    </div>
+
+    <div class="invoice-info">
+
+        <p>
+            <strong>Customer:</strong>
+            {{ invoice.customer.first_name }}
+            {{ invoice.customer.last_name }}
+        </p>
+
+        <p>
+            <strong>Phone:</strong>
+            {{ invoice.customer.phone }}
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+            {{ invoice.payment_status }}
+        </p>
+        
+        <p>
+            <strong>Date:</strong>
+            {{ invoice.invoice_date.strftime('%d-%m-%Y') }}
+        </p>
+
+    </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th>Line Total</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for item in invoice.items %}
+
+            <tr>
+
+                <td>
+                    {{ item.item.item_name }}
+                </td>
+
+                <td>
+                    ₹{{ item.item.price }}
+                </td>
+
+                <td>
+                    {{ item.quantity }}
+                </td>
+
+                <td>
+                    ₹{{ item.line_total }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <div class="total">
+
+    <p>
+        Subtotal:
+        ₹{{ invoice.subtotal }}
+    </p>
+
+    <p>
+        Tax ({{ invoice.tax_percentage }}%):
+        ₹{{ invoice.tax_amount }}
+    </p>
+    
+    
+
+    <h3>
+        Grand Total:
+        ₹{{ invoice.total_price }}
+    </h3>
+
+    </div>
+
+</body>
+</html>

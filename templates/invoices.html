@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+
+{% block title %}
+Invoices
+{% endblock %}
+
+{% block content %}
+
+<div class="level">
+
+
+<div class="level-left">
+    <h1 class="title">
+        Invoices
+    </h1>
+</div>
+
+<div class="level-right">
+
+    <a
+    href="/invoices/add"
+    class="button is-primary">
+
+        <span class="icon">
+            <i class="fas fa-plus"></i>
+        </span>
+
+        <span>
+            Create Invoice
+        </span>
+
+    </a>
+
+</div>
+
+
+</div>
+
+{% if invoices %}
+
+<div class="box">
+
+
+<table
+class="table is-fullwidth is-hoverable">
+
+    <thead>
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>Customer</th>
+
+            <th>Items</th>
+
+            <th>Total</th>
+
+            <th>Date</th>
+
+            <th>Status</th>
+
+            <th>Actions</th>
+
+            <th>PDF</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for invoice in invoices %}
+
+        <tr>
+
+            <td>
+                {{ invoice.id }}
+            </td>
+
+            <td>
+
+                <strong>
+                    {{ invoice.customer.first_name }}
+                    {{ invoice.customer.last_name }}
+                </strong>
+
+            </td>
+
+            <td>
+
+                {% for item in invoice.items %}
+
+                <span class="tag">
+
+                    {{ item.item.item_name }}
+                    ×
+                    {{ item.quantity }}
+
+                </span>
+
+                {% endfor %}
+
+            </td>
+
+            <td>
+
+                <p>
+                    <strong>Subtotal:</strong>
+                    ₹{{ invoice.subtotal }}
+                </p>
+
+                <p>
+                    <strong>Tax:</strong>
+                    ₹{{ invoice.tax_amount }}
+                </p>
+
+                <p>
+                    <strong>Total:</strong>
+                    ₹{{ invoice.total_price }}
+                </p>
+
+            </td>
+
+            <td>
+
+                {{ invoice.invoice_date.strftime('%d-%m-%Y %H:%M') }}
+
+            </td>
+
+            <td>
+
+                {% if invoice.payment_status == "PAID" %}
+
+                <span class="tag is-success is-medium">
+
+                    <i class="fas fa-check"></i>
+                    &nbsp;PAID
+
+                </span>
+
+                {% else %}
+
+                <span class="tag is-danger is-medium">
+
+                    <i class="fas fa-clock"></i>
+                    &nbsp;UNPAID
+
+                </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                {% if invoice.payment_status == "UNPAID" %}
+
+                <a
+                href="/invoices/pay/{{ invoice.id }}"
+                class="button is-success is-small">
+
+                    Mark Paid
+
+                </a>
+
+                {% else %}
+
+                <span
+                class="tag is-success">
+
+                    Completed
+
+                </span>
+
+                {% endif %}
+
+            </td>
+
+            <td>
+
+                <a
+                href="{{ url_for('invoice_pdf', invoice_id=invoice.id) }}"
+                class="button is-info is-small">
+
+                    <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </span>
+
+                    <span>
+                        PDF
+                    </span>
+
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+
+</div>
+
+{% else %}
+
+<article class="message is-info">
+
+
+<div class="message-body">
+
+    No invoices found.
+    Create your first invoice.
+
+</div>
+
+
+</article>
+
+{% endif %}
+
+{% endblock %}

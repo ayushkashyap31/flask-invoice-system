@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}
+Items
+{% endblock %}
+
+{% block content %}
+
+<div class="level">
+
+    <div class="level-left">
+
+        <h1 class="title">
+            Items
+        </h1>
+
+    </div>
+
+    <div class="level-right">
+
+        <a
+            href="/items/add"
+            class="button is-primary">
+
+            <span class="icon">
+                <i class="fas fa-plus"></i>
+            </span>
+
+            <span>
+                Add Item
+            </span>
+
+        </a>
+
+    </div>
+
+</div>
+
+{% if items %}
+
+<div class="box">
+
+    <table
+        class="table is-fullwidth is-hoverable">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Item Name</th>
+
+                <th>Price</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for item in items %}
+
+            <tr>
+
+                <td>
+                    {{ item.id }}
+                </td>
+
+                <td>
+
+                    <strong>
+                        {{ item.item_name }}
+                    </strong>
+
+                </td>
+
+                <td>
+
+                    <span class="tag is-info is-medium">
+
+                        ₹{{ item.price }}
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% else %}
+
+<article class="message is-info">
+
+    <div class="message-body">
+
+        No items found.
+        Add your first item.
+
+    </div>
+
+</article>
+
+{% endif %}
+
+{% endblock %}

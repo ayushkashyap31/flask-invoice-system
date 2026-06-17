@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Invoice
+{% endblock %}
+
+{% block content %}
+
+<div class="columns is-centered">
+
+```
+<div class="column is-10">
+
+    <div class="box">
+
+        <h1 class="title">
+            Create Invoice
+        </h1>
+
+        <form method="POST">
+
+            <div class="field">
+
+                <label class="label">
+                    Customer
+                </label>
+
+                <div class="control">
+
+                    <div class="select is-fullwidth">
+
+                        <select
+                            name="customer"
+                            required>
+
+                            {% for customer in customers %}
+
+                            <option
+                                value="{{ customer.id }}">
+
+                                {{ customer.first_name }}
+                                {{ customer.last_name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <h2 class="subtitle">
+                Invoice Items
+            </h2>
+
+            <div id="items-container">
+
+                <div class="item-row box">
+
+                    <div class="columns is-vcentered">
+
+                        <div class="column">
+
+                            <label class="label">
+                                Item
+                            </label>
+
+                            <div class="select is-fullwidth">
+
+                                <select
+                                    name="item"
+                                    required>
+
+                                    {% for item in items %}
+
+                                    <option
+                                        value="{{ item.id }}">
+
+                                        {{ item.item_name }}
+                                        - ₹{{ item.price }}
+
+                                    </option>
+
+                                    {% endfor %}
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="column is-3">
+
+                            <label class="label">
+                                Quantity
+                            </label>
+
+                            <input
+                                class="input"
+                                type="number"
+                                name="quantity"
+                                min="1"
+                                value="1"
+                                required>
+
+                        </div>
+
+                        <div class="column is-2">
+
+                            <label class="label">
+                                Remove
+                            </label>
+
+                            <button
+                                type="button"
+                                class="button is-danger is-fullwidth"
+                                onclick="removeRow(this)">
+
+                                Remove
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+            <br>
+
+            <div class="field">
+
+                <button
+                    type="button"
+                    class="button is-link"
+                    onclick="addItemRow()">
+
+                    <span class="icon">
+                        <i class="fas fa-plus"></i>
+                    </span>
+
+                    <span>
+                        Add Item
+                    </span>
+
+                </button>
+
+            </div>
+
+            <hr>
+
+            <div class="field">
+
+                <label class="label">
+                    Tax Percentage
+                </label>
+
+                <div class="control">
+
+                    <input
+                        class="input"
+                        type="number"
+                        name="tax_percentage"
+                        value="18"
+                        min="0"
+                        step="0.01">
+
+                </div>
+
+            </div>
+
+            <div class="field is-grouped">
+
+                <div class="control">
+
+                    <button
+                        type="submit"
+                        class="button is-primary">
+
+                        <span class="icon">
+                            <i class="fas fa-file-invoice"></i>
+                        </span>
+
+                        <span>
+                            Create Invoice
+                        </span>
+
+                    </button>
+
+                </div>
+
+                <div class="control">
+
+                    <a
+                        href="/invoices"
+                        class="button is-light">
+
+                        Cancel
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<script>
+
+function addItemRow() {
+
+    const container =
+        document.getElementById(
+            "items-container"
+        );
+
+    const firstRow =
+        document.querySelector(
+            ".item-row"
+        );
+
+    const newRow =
+        firstRow.cloneNode(true);
+
+    newRow.querySelector(
+        'input[name="quantity"]'
+    ).value = 1;
+
+    container.appendChild(
+        newRow
+    );
+}
+
+function removeRow(button) {
+
+    const rows =
+        document.querySelectorAll(
+            ".item-row"
+        );
+
+    if (rows.length === 1) {
+
+        alert(
+            "At least one item is required."
+        );
+
+        return;
+    }
+
+    button.closest(
+        ".item-row"
+    ).remove();
+}
+
+</script>
+
+{% endblock %}

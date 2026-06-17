@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}
+Notifications
+{% endblock %}
+
+{% block content %}
+
+<div class="level">
+
+
+<div class="level-left">
+
+    <h1 class="title">
+
+        Notifications
+
+    </h1>
+
+</div>
+
+
+</div>
+
+{% if notifications %}
+
+<div class="box">
+
+
+<table
+    class="table is-fullwidth is-hoverable">
+
+    <thead>
+
+        <tr>
+
+            <th>Invoice ID</th>
+
+            <th>Type</th>
+
+            <th>Message</th>
+
+            <th>Date</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for n in notifications %}
+
+        <tr>
+
+            <td>
+
+                <span class="tag is-info is-medium">
+
+                    #{{ n.invoice.id }}
+
+                </span>
+
+            </td>
+
+            <td>
+
+                <span class="tag is-warning">
+
+                    Reminder
+
+                </span>
+
+            </td>
+
+            <td>
+
+                {{ n.message }}
+
+            </td>
+
+            <td>
+
+                {{ n.created_at.strftime('%d-%m-%Y %H:%M') }}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+
+</div>
+
+{% else %}
+
+<article class="message is-info">
+
+
+<div class="message-body">
+
+    No notifications available.
+
+</div>
+
+
+</article>
+
+{% endif %}
+
+{% endblock %}

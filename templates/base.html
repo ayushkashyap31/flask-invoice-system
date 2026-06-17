@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        {% block title %}
+        Invoice Management System
+        {% endblock %}
+
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        body {
+            min-height: 100vh;
+            background-color: #111827;
+        }
+
+        .navbar {
+            background-color: #1f2937 !important;
+            border-bottom: 1px solid #374151;
+        }
+
+        .navbar-item,
+        .navbar-link {
+            color: white !important;
+        }
+
+        .navbar-item:hover {
+            background-color: #374151 !important;
+        }
+
+        .box {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            color: white;
+        }
+
+        .title,
+        .subtitle,
+        .label,
+        strong {
+            color: white !important;
+        }
+
+        .table {
+            background-color: #1f2937;
+            color: white;
+        }
+
+        .table th {
+            background-color: #374151;
+            color: white;
+        }
+
+        .table td {
+            color: #e5e7eb;
+        }
+
+        .input,
+        .select select,
+        .textarea {
+            background-color: #374151;
+            border-color: #4b5563;
+            color: white;
+        }
+
+        .input::placeholder,
+        .textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .tag {
+            background-color: #374151;
+            color: white;
+        }
+
+        .button {
+            transition: all 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+        }
+
+        .content-wrapper {
+            padding-top: 1rem;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav
+        class="navbar"
+        role="navigation">
+
+        <div class="container">
+
+            <div class="navbar-brand">
+
+                <a class="navbar-item">
+
+                    <span class="icon">
+                        <i class="fas fa-file-invoice"></i>
+                    </span>
+
+                    <span>
+                        Invoice Management System
+                    </span>
+
+                </a>
+
+            </div>
+
+            <div class="navbar-menu">
+
+                <div class="navbar-start">
+
+                    <a
+                        class="navbar-item"
+                        href="/">
+
+                        <span class="icon">
+                            <i class="fas fa-chart-line"></i>
+                        </span>
+
+                        <span>
+                            Dashboard
+                        </span>
+
+                    </a>
+
+                    <a
+                        class="navbar-item"
+                        href="/customers">
+
+                        <span class="icon">
+                            <i class="fas fa-users"></i>
+                        </span>
+
+                        <span>
+                            Customers
+                        </span>
+
+                    </a>
+
+                    <a
+                        class="navbar-item"
+                        href="/items">
+
+                        <span class="icon">
+                            <i class="fas fa-box"></i>
+                        </span>
+
+                        <span>
+                            Items
+                        </span>
+
+                    </a>
+
+                    <a
+                        class="navbar-item"
+                        href="/invoices">
+
+                        <span class="icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </span>
+
+                        <span>
+                            Invoices
+                        </span>
+
+                    </a>
+
+                    <a
+                        class="navbar-item"
+                        href="/notifications">
+
+                        <span class="icon">
+                            <i class="fas fa-bell"></i>
+                        </span>
+
+                        <span>
+                            Notifications
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <section class="section">
+
+        <div class="container content-wrapper">
+
+            {% block content %}
+            {% endblock %}
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>

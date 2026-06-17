@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Customer
+{% endblock %}
+
+{% block content %}
+
+<div class="columns is-centered">
+
+    <div class="column is-half">
+
+        <div class="box">
+
+            <h1 class="title">
+                Add Customer
+            </h1>
+
+            <form method="POST">
+
+                <div class="field">
+
+                    <label class="label">
+                        First Name
+                    </label>
+
+                    <div class="control">
+
+                        <input
+                            class="input"
+                            type="text"
+                            name="first_name"
+                            placeholder="Enter first name"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="field">
+
+                    <label class="label">
+                        Last Name
+                    </label>
+
+                    <div class="control">
+
+                        <input
+                            class="input"
+                            type="text"
+                            name="last_name"
+                            placeholder="Enter last name"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="field">
+
+                    <label class="label">
+                        Phone Number
+                    </label>
+
+                    <div class="control">
+
+                        <input
+                            class="input"
+                            type="tel"
+                            name="phone"
+                            placeholder="Enter phone number"
+                            required>
+
+                    </div>
+
+                </div>
+
+                <div class="field is-grouped">
+
+                    <div class="control">
+
+                        <button
+                            type="submit"
+                            class="button is-primary">
+
+                            <span class="icon">
+                                <i class="fas fa-save"></i>
+                            </span>
+
+                            <span>
+                                Save Customer
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                    <div class="control">
+
+                        <a
+                            href="/customers"
+                            class="button is-light">
+
+                            Cancel
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
