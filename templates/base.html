@@ -217,6 +217,36 @@
 
         <div class="container content-wrapper">
 
+            {% with messages = get_flashed_messages(with_categories=true) %}
+
+                {% if messages %}
+
+                    {% for category, message in messages %}
+
+                        <div
+                            class="notification
+                            {% if category == 'success' %}
+                                is-success
+                            {% elif category == 'danger' %}
+                                is-danger
+                            {% elif category == 'warning' %}
+                                is-warning
+                            {% else %}
+                                is-info
+                            {% endif %}
+                        ">
+                            <button class="delete"></button>
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            {% endwith %}
+
             {% block content %}
             {% endblock %}
 
@@ -224,6 +254,32 @@
 
     </section>
 
+    
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        document
+            .querySelectorAll(".notification .delete")
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        button.parentElement.remove();
+
+                    }
+                );
+
+            });
+
+    }
+);
+
+</script>
 </body>
 
 </html>

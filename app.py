@@ -2,7 +2,15 @@
 
 from models import *
 
-from flask import Flask, render_template, request, redirect, url_for, make_response 
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    make_response,
+    flash
+)
 from peewee import *
 import datetime
 from weasyprint import HTML
@@ -20,6 +28,7 @@ import json
 
 
 app = Flask(__name__)
+app.secret_key = "invoice-secret-key"
 
 redis_client = redis.Redis(
     host="localhost",
@@ -57,6 +66,11 @@ def customers_add():
             last_name=last_name,
             phone=phone
         )
+        
+        flash(
+            "Customer added successfully!",
+            "success"
+        )
 
         return redirect(url_for("customers_list"))
 
@@ -80,6 +94,11 @@ def items_add():
         Items.create(
             item_name=item_name,
             price=price
+        )
+
+        flash(
+        "Item added successfully!",
+        "success"
         )
 
         return redirect(url_for("items_list"))
@@ -155,6 +174,9 @@ def invoices_add():
 
         redis_client.delete(f"customer_{customer.id}_invoices")
 
+        flash("Invoice created successfully!",
+            "success"
+        )
 
         return redirect(url_for("invoices_list"))
 
@@ -207,6 +229,11 @@ def mark_invoice_paid(invoice_id):
 
     invoice.save()
 
+    flash(
+    "Invoice marked as paid!",
+    "success"
+    )
+
     return redirect(
         url_for("invoices_list")
     )
@@ -237,8 +264,7 @@ def notifications():
 
 
 
-@app.route("/newcart")
-def
+
 
 
 
