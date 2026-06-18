@@ -60,6 +60,18 @@ def customers_add():
         first_name = request.form.get("first_name")
         last_name = request.form.get("last_name")
         phone = request.form.get("phone")
+    
+
+        if not phone.isdigit() or len(phone) != 10:
+
+            flash(
+                "Phone number must contain exactly 10 digits.",
+                "danger"
+            )
+
+            return redirect(
+                url_for("customers_add")
+            )
 
         Customers.create(
             first_name=first_name,
