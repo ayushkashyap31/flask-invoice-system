@@ -175,6 +175,24 @@ def invoices_list():
         invoices=invoices,
         search=search
     )
+
+
+@app.route(
+    "/invoices/<int:invoice_id>"
+)
+def invoice_details(invoice_id):
+
+    invoice = Invoice.get_by_id(
+        invoice_id
+    )
+
+    return render_template(
+        "invoice_details.html",
+        invoice=invoice
+    )
+
+
+    
 @app.route("/invoices/add", methods=["GET", "POST"])
 def invoices_add():
 

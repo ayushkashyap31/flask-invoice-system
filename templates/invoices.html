@@ -94,6 +94,8 @@ class="table is-fullwidth is-hoverable">
 
             <th>Actions</th>
 
+            <th>View</th>
+
             <th>PDF</th>
 
         </tr>
@@ -206,6 +208,17 @@ class="table is-fullwidth is-hoverable">
                 </span>
 
                 {% endif %}
+
+            </td>
+            <td>
+
+                <a
+                href="/invoices/{{ invoice.id }}"
+                class="button is-link is-small">
+
+                    View
+
+                </a>
 
             </td>
 

@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}
+Invoice Details
+{% endblock %}
+
+{% block content %}
+
+<h1 class="title">
+    Invoice #{{ invoice.id }}
+</h1>
+
+<div class="box">
+
+    <h2 class="title is-5">
+        Customer Details
+    </h2>
+
+    <p>
+        <strong>Name:</strong>
+        {{ invoice.customer.first_name }}
+        {{ invoice.customer.last_name }}
+    </p>
+
+    <p>
+        <strong>Phone:</strong>
+        {{ invoice.customer.phone }}
+    </p>
+
+</div>
+
+<div class="box">
+
+    <h2 class="title is-5">
+        Invoice Items
+    </h2>
+
+    <table class="table is-fullwidth">
+
+        <thead>
+
+            <tr>
+
+                <th>Item</th>
+
+                <th>Quantity</th>
+
+                <th>Total</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for item in invoice.items %}
+
+            <tr>
+
+                <td>
+                    {{ item.item.item_name }}
+                </td>
+
+                <td>
+                    {{ item.quantity }}
+                </td>
+
+                <td>
+                    ₹{{ item.line_total }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<div class="box">
+
+    <h2 class="title is-5">
+        Billing Summary
+    </h2>
+
+    <p>
+        <strong>Subtotal:</strong>
+        ₹{{ invoice.subtotal }}
+    </p>
+
+    <p>
+        <strong>Tax:</strong>
+        ₹{{ invoice.tax_amount }}
+    </p>
+
+    <p>
+        <strong>Total:</strong>
+        ₹{{ invoice.total_price }}
+    </p>
+
+</div>
+
+<div class="box">
+
+    <h2 class="title is-5">
+        Invoice Information
+    </h2>
+
+    <p>
+
+        <strong>Status:</strong>
+
+        {% if invoice.payment_status == "PAID" %}
+
+            <span class="tag is-success">
+                PAID
+            </span>
+
+        {% else %}
+
+            <span class="tag is-danger">
+                UNPAID
+            </span>
+
+        {% endif %}
+
+    </p>
+
+    <br>
+
+    <p>
+
+        <strong>Date:</strong>
+
+        {{ invoice.invoice_date.strftime('%d-%m-%Y %H:%M') }}
+
+    </p>
+
+</div>
+
+<div class="buttons">
+
+    <a
+        href="/invoices"
+        class="button is-light">
+
+        Back
+
+    </a>
+
+    <a
+        href="{{ url_for('invoice_pdf', invoice_id=invoice.id) }}"
+        class="button is-primary">
+
+        Download PDF
+
+    </a>
+
+</div>
+
+{% endblock %}
