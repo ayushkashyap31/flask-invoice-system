@@ -55,6 +55,8 @@ Customers
 
                 <th>Phone</th>
 
+                <th>Actions</th>
+
             </tr>
 
         </thead>
@@ -88,6 +90,18 @@ Customers
                         {{ customer.phone }}
 
                     </span>
+
+                </td>
+
+                <td>
+
+                    <a
+                    href="/customers/edit/{{ customer.id }}"
+                    class="button is-warning is-small">
+
+                        Edit
+
+                    </a>
 
                 </td>
 

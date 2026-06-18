@@ -12,9 +12,19 @@ Add Customer
 
         <div class="box">
 
-            <h1 class="title">
+        <h1 class="title">
+
+            {% if customer %}
+
+                Edit Customer
+
+            {% else %}
+
                 Add Customer
-            </h1>
+
+            {% endif %}
+
+        </h1>
 
             <form method="POST">
 
@@ -31,7 +41,7 @@ Add Customer
                             class="input"
                             type="text"
                             name="first_name"
-                            placeholder="Enter first name"
+                            value="{{ customer.first_name if customer else '' }}"
                             required>
 
                     </div>
@@ -51,9 +61,8 @@ Add Customer
                             class="input"
                             type="text"
                             name="last_name"
-                            placeholder="Enter last name"
+                            value="{{ customer.last_name if customer else '' }}"
                             required>
-
                     </div>
 
                 </div>
@@ -71,6 +80,7 @@ Add Customer
                             class="input"
                             type="tel"
                             name="phone"
+                            value="{{ customer.phone if customer else '' }}"
                             pattern="[0-9]{10}"
                             maxlength="10"
                             oninput="this.value=this.value.replace(/[^0-9]/g,'')"
@@ -94,7 +104,17 @@ Add Customer
                             </span>
 
                             <span>
-                                Save Customer
+
+                                {% if customer %}
+
+                                    Update Customer
+
+                                {% else %}
+
+                                    Save Customer
+
+                                {% endif %}
+
                             </span>
 
                         </button>

@@ -114,7 +114,52 @@ def customers_add():
 
         return redirect(url_for("customers_list"))
 
-    return render_template("customer_form.html")
+    return render_template(
+    "customer_form.html",
+    customer=None
+)
+
+
+
+@app.route(
+    "/customers/edit/<int:id>",
+    methods=["GET", "POST"]
+)
+def edit_customer(id):
+
+    customer = Customers.get_by_id(id)
+
+    if request.method == "POST":
+
+        customer.first_name = request.form.get(
+            "first_name"
+        )
+
+        customer.last_name = request.form.get(
+            "last_name"
+        )
+
+        customer.phone = request.form.get(
+            "phone"
+        )
+
+        customer.save()
+
+        flash(
+            "Customer updated successfully!",
+            "success"
+        )
+
+        return redirect(
+            url_for("customers_list")
+        )
+
+    return render_template(
+        "customer_form.html",
+        customer=customer
+    )
+
+
 
 @app.route("/items")
 def items_list():
@@ -192,7 +237,7 @@ def invoice_details(invoice_id):
     )
 
 
-    
+
 @app.route("/invoices/add", methods=["GET", "POST"])
 def invoices_add():
 
