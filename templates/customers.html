@@ -95,13 +95,26 @@ Customers
 
                 <td>
 
-                    <a
-                    href="/customers/edit/{{ customer.id }}"
-                    class="button is-warning is-small">
+                    <div class="buttons">
 
-                        Edit
+                        <a
+                        href="/customers/edit/{{ customer.id }}"
+                        class="button is-warning is-small">
 
-                    </a>
+                            Edit
+
+                        </a>
+
+                        <a
+                        href="/customers/delete/{{ customer.id }}"
+                        class="button is-danger is-small"
+                        onclick="return confirm('Are you sure you want to delete this customer?')">
+
+                            Delete
+
+                        </a>
+
+                    </div>
 
                 </td>
 

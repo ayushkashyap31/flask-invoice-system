@@ -190,6 +190,38 @@ def items_add():
 
     return render_template("item_form.html")
 
+
+
+@app.route(
+    "/customers/delete/<int:id>"
+)
+def delete_customer(id):
+
+    customer = Customers.get_by_id(id)
+
+    try:
+
+        customer.delete_instance()
+
+        flash(
+            "Customer deleted successfully!",
+            "success"
+        )
+
+    except Exception:
+
+        flash(
+            "Customer cannot be deleted because invoices exist.",
+            "danger"
+        )
+
+    return redirect(
+        url_for("customers_list")
+    )
+
+
+
+
 @app.route("/invoices")
 def invoices_list():
 
