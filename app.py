@@ -147,13 +147,34 @@ def items_add():
 
 @app.route("/invoices")
 def invoices_list():
+
+    search = request.args.get(
+        "search",
+        ""
+    )
+
     invoices = Invoice.select()
+
+    if search:
+
+        invoices = (
+            Invoice
+            .select()
+            .join(Customers)
+            .where(
+
+                (Customers.first_name.contains(search))
+                |
+                (Customers.last_name.contains(search))
+
+            )
+        )
 
     return render_template(
         "invoices.html",
-        invoices=invoices
+        invoices=invoices,
+        search=search
     )
-
 @app.route("/invoices/add", methods=["GET", "POST"])
 def invoices_add():
 
