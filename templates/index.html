@@ -1,72 +1,172 @@
 {% extends "base.html" %}
 
+{% block title %}
+Dashboard
+{% endblock %}
+
 {% block content %}
 
-<h1 class="title">
+<h1 class="title mb-5">
     Dashboard
 </h1>
 
 <div class="columns">
 
-    <div class="column">
 
-        <div class="box">
+<div class="column">
 
-            <h2 class="title is-4">
-                Customers
-            </h2>
+    <div class="box has-text-centered">
 
-            <a
-            class="button is-primary"
-            href="/customers">
+        <p class="heading">
+            Customers
+        </p>
 
-                Manage
+        <p class="title has-text-primary">
+            {{ customer_count }}
+        </p>
 
-            </a>
+        <a
+        class="button is-primary is-fullwidth"
+        href="/customers">
 
-        </div>
+            Manage Customers
 
-    </div>
-
-    <div class="column">
-
-        <div class="box">
-
-            <h2 class="title is-4">
-                Items
-            </h2>
-
-            <a
-            class="button is-info"
-            href="/items">
-
-                Manage
-
-            </a>
-
-        </div>
+        </a>
 
     </div>
 
-    <div class="column">
+</div>
 
-        <div class="box">
+<div class="column">
 
-            <h2 class="title is-4">
-                Invoices
-            </h2>
+    <div class="box has-text-centered">
 
-            <a
-            class="button is-success"
-            href="/invoices">
+        <p class="heading">
+            Items
+        </p>
 
-                Manage
+        <p class="title has-text-info">
+            {{ item_count }}
+        </p>
 
-            </a>
+        <a
+        class="button is-info is-fullwidth"
+        href="/items">
 
-        </div>
+            Manage Items
+
+        </a>
 
     </div>
+
+</div>
+
+<div class="column">
+
+    <div class="box has-text-centered">
+
+        <p class="heading">
+            Invoices
+        </p>
+
+        <p class="title has-text-success">
+            {{ invoice_count }}
+        </p>
+
+        <a
+        class="button is-success is-fullwidth"
+        href="/invoices">
+
+            Manage Invoices
+
+        </a>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<div class="columns">
+
+
+<div class="column">
+
+    <div class="box has-text-centered">
+
+        <p class="heading">
+            Unpaid Invoices
+        </p>
+
+        <p class="title has-text-danger">
+            {{ unpaid_count }}
+        </p>
+
+    </div>
+
+</div>
+
+<div class="column">
+
+    <div class="box has-text-centered">
+
+        <p class="heading">
+            Total Revenue
+        </p>
+
+        <p class="title has-text-warning">
+            ₹{{ revenue }}
+        </p>
+
+    </div>
+
+</div>
+
+</div>
+
+<div class="box">
+
+
+<h2 class="title is-5">
+    Quick Actions
+</h2>
+
+<div class="buttons">
+
+    <a
+    href="/customers/add"
+    class="button is-primary">
+
+        + Add Customer
+
+    </a>
+
+    <a
+    href="/items/add"
+    class="button is-info">
+
+        + Add Item
+
+    </a>
+
+    <a
+    href="/invoices/add"
+    class="button is-success">
+
+        + Create Invoice
+
+    </a>
+
+    <a
+    href="/notifications"
+    class="button is-warning">
+
+        Notifications
+
+    </a>
+
+</div>
 
 </div>
 

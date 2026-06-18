@@ -39,9 +39,37 @@ redis_client = redis.Redis(
 
 
 
-@app.route('/')
+@app.route("/")
 def home():
-    return render_template('index.html')
+
+    customer_count = Customers.select().count()
+
+    item_count = Items.select().count()
+
+    invoice_count = Invoice.select().count()
+
+    unpaid_count = (
+        Invoice
+        .select()
+        .where(
+            Invoice.payment_status == "UNPAID"
+        )
+        .count()
+    )
+
+    revenue = sum(
+        invoice.total_price
+        for invoice in Invoice.select()
+    )
+
+    return render_template(
+        "index.html",
+        customer_count=customer_count,
+        item_count=item_count,
+        invoice_count=invoice_count,
+        unpaid_count=unpaid_count,
+        revenue=revenue
+    )
 
 @app.route('/hello')
 def hello():
