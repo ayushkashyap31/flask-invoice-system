@@ -72,9 +72,10 @@ Invoices
 
 <div class="box">
 
+    <div class="table-container">
 
-<table
-class="table is-fullwidth is-hoverable">
+        <table
+            class="table is-fullwidth is-hoverable">
 
     <thead>
 
@@ -191,19 +192,25 @@ class="table is-fullwidth is-hoverable">
                 {% if invoice.payment_status == "UNPAID" %}
 
                 <a
-                href="/invoices/pay/{{ invoice.id }}"
-                class="button is-success is-small">
+                    href="/invoices/pay/{{ invoice.id }}"
+                    class="button is-success is-small">
 
-                    Mark Paid
+                    <span class="icon">
+                        <i class="fas fa-check-circle"></i>
+                    </span>
+                    <span>Mark Paid</span>
 
                 </a>
 
                 {% else %}
 
                 <span
-                class="tag is-success">
+                    class="tag is-success">
 
-                    Completed
+                    <span class="icon">
+                        <i class="fas fa-circle-check"></i>
+                    </span>
+                    <span>Completed</span>
 
                 </span>
 

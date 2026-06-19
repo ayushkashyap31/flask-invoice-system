@@ -80,11 +80,11 @@ Add Customer
                             class="input"
                             type="tel"
                             name="phone"
-                            value="{{ customer.phone if customer else '' }}"
                             pattern="[0-9]{10}"
                             maxlength="10"
-                            oninput="this.value=this.value.replace(/[^0-9]/g,'')"
                             required
+                            oninvalid="this.setCustomValidity('Phone number must be exactly 10 digits')"
+                            oninput="this.setCustomValidity('')"
                         >
 
                     </div>

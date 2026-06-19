@@ -15,9 +15,12 @@ Dashboard
 
 <div class="column">
 
-    <div class="box has-text-centered">
+    <div class="box dashboard-card has-text-centered">
 
-        <p class="heading">
+        <p class="card-label">
+            <span class="icon has-text-primary">
+                <i class="fas fa-users"></i>
+            </span>
             Customers
         </p>
 
@@ -26,10 +29,13 @@ Dashboard
         </p>
 
         <a
-        class="button is-primary is-fullwidth"
-        href="/customers">
+            class="button is-primary is-fullwidth"
+            href="/customers">
 
-            Manage Customers
+            <span class="icon">
+                <i class="fas fa-user-check"></i>
+            </span>
+            <span>Manage Customers</span>
 
         </a>
 
@@ -39,9 +45,12 @@ Dashboard
 
 <div class="column">
 
-    <div class="box has-text-centered">
+    <div class="box dashboard-card has-text-centered">
 
-        <p class="heading">
+        <p class="card-label">
+            <span class="icon has-text-info">
+                <i class="fas fa-box-open"></i>
+            </span>
             Items
         </p>
 
@@ -50,10 +59,13 @@ Dashboard
         </p>
 
         <a
-        class="button is-info is-fullwidth"
-        href="/items">
+            class="button is-info is-fullwidth"
+            href="/items">
 
-            Manage Items
+            <span class="icon">
+                <i class="fas fa-tags"></i>
+            </span>
+            <span>Manage Items</span>
 
         </a>
 
@@ -63,9 +75,12 @@ Dashboard
 
 <div class="column">
 
-    <div class="box has-text-centered">
+    <div class="box dashboard-card has-text-centered">
 
-        <p class="heading">
+        <p class="card-label">
+            <span class="icon has-text-success">
+                <i class="fas fa-file-invoice-dollar"></i>
+            </span>
             Invoices
         </p>
 
@@ -74,10 +89,13 @@ Dashboard
         </p>
 
         <a
-        class="button is-success is-fullwidth"
-        href="/invoices">
+            class="button is-success is-fullwidth"
+            href="/invoices">
 
-            Manage Invoices
+            <span class="icon">
+                <i class="fas fa-clipboard-list"></i>
+            </span>
+            <span>Manage Invoices</span>
 
         </a>
 
@@ -93,9 +111,12 @@ Dashboard
 
 <div class="column">
 
-    <div class="box has-text-centered">
+    <div class="box dashboard-card has-text-centered">
 
-        <p class="heading">
+        <p class="card-label">
+            <span class="icon has-text-danger">
+                <i class="fas fa-exclamation-circle"></i>
+            </span>
             Unpaid Invoices
         </p>
 
@@ -109,9 +130,12 @@ Dashboard
 
 <div class="column">
 
-    <div class="box has-text-centered">
+    <div class="box dashboard-card has-text-centered">
 
-        <p class="heading">
+        <p class="card-label">
+            <span class="icon has-text-warning">
+                <i class="fas fa-coins"></i>
+            </span>
             Total Revenue
         </p>
 
@@ -127,46 +151,72 @@ Dashboard
 
 <div class="box">
 
+    <div class="level mb-4">
 
-<h2 class="title is-5">
-    Quick Actions
-</h2>
+        <div class="level-left">
+            <h2 class="title is-5">
+                Quick Actions
+            </h2>
+        </div>
 
-<div class="buttons">
+        <div class="level-right">
+            <span class="tag is-info is-medium">
+                <span class="icon">
+                    <i class="fas fa-bolt"></i>
+                </span>
+                <span>Instant access</span>
+            </span>
+        </div>
 
-    <a
-    href="/customers/add"
-    class="button is-primary">
+    </div>
 
-        + Add Customer
+    <div class="buttons is-flex-wrap-wrap">
 
-    </a>
+        <a
+            href="/customers/add"
+            class="button is-primary is-rounded">
 
-    <a
-    href="/items/add"
-    class="button is-info">
+            <span class="icon">
+                <i class="fas fa-user-plus"></i>
+            </span>
+            <span>Add Customer</span>
 
-        + Add Item
+        </a>
 
-    </a>
+        <a
+            href="/items/add"
+            class="button is-info is-rounded">
 
-    <a
-    href="/invoices/add"
-    class="button is-success">
+            <span class="icon">
+                <i class="fas fa-box-open"></i>
+            </span>
+            <span>Add Item</span>
 
-        + Create Invoice
+        </a>
 
-    </a>
+        <a
+            href="/invoices/add"
+            class="button is-success is-rounded">
 
-    <a
-    href="/notifications"
-    class="button is-warning">
+            <span class="icon">
+                <i class="fas fa-file-invoice-dollar"></i>
+            </span>
+            <span>Create Invoice</span>
 
-        Notifications
+        </a>
 
-    </a>
+        <a
+            href="/notifications"
+            class="button is-warning is-rounded">
 
-</div>
+            <span class="icon">
+                <i class="fas fa-bell"></i>
+            </span>
+            <span>Notifications</span>
+
+        </a>
+
+    </div>
 
 </div>
 

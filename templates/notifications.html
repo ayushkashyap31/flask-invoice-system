@@ -26,72 +26,77 @@ Notifications
 
 <div class="box">
 
+    <div class="table-container">
 
-<table
-    class="table is-fullwidth is-hoverable">
+        <table
+            class="table is-fullwidth is-hoverable">
 
-    <thead>
+            <thead>
 
-        <tr>
+                <tr>
 
-            <th>Invoice ID</th>
+                    <th>Invoice ID</th>
 
-            <th>Type</th>
+                    <th>Type</th>
 
-            <th>Message</th>
+                    <th>Message</th>
 
-            <th>Date</th>
+                    <th>Date</th>
 
-        </tr>
+                </tr>
 
-    </thead>
+            </thead>
 
-    <tbody>
+            <tbody>
 
-        {% for n in notifications %}
+                {% for n in notifications %}
 
-        <tr>
+                <tr>
 
-            <td>
+                    <td>
 
-                <span class="tag is-info is-medium">
+                        <span class="tag is-info is-medium">
 
-                    #{{ n.invoice.id }}
+                            #{{ n.invoice.id }}
 
-                </span>
+                        </span>
 
-            </td>
+                    </td>
 
-            <td>
+                    <td>
 
-                <span class="tag is-warning">
+                        <span class="tag is-warning">
 
-                    Reminder
+                            <span class="icon">
+                                <i class="fas fa-bell"></i>
+                            </span>
+                            <span>Reminder</span>
 
-                </span>
+                        </span>
 
-            </td>
+                    </td>
 
-            <td>
+                    <td>
 
-                {{ n.message }}
+                        {{ n.message }}
 
-            </td>
+                    </td>
 
-            <td>
+                    <td>
 
-                {{ n.created_at.strftime('%d-%m-%Y %H:%M') }}
+                        {{ n.created_at.strftime('%d-%m-%Y %H:%M') }}
 
-            </td>
+                    </td>
 
-        </tr>
+                </tr>
 
-        {% endfor %}
+                {% endfor %}
 
-    </tbody>
+            </tbody>
 
-</table>
+        </table>
 
+    </div>
 
 </div>
 
@@ -99,13 +104,11 @@ Notifications
 
 <article class="message is-info">
 
+    <div class="message-body">
 
-<div class="message-body">
+        No notifications available.
 
-    No notifications available.
-
-</div>
-
+    </div>
 
 </article>
 
