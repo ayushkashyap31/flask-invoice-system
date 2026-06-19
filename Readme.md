@@ -1,6 +1,6 @@
 # Invoice Management System
 
-A Flask-based Invoice Management System for managing customers, items, invoices, payments, and notifications.
+A Flask-based Invoice Management System for managing customers, items, invoices, payments, notifications, and PDF generation.
 
 ## Features
 
@@ -12,8 +12,10 @@ A Flask-based Invoice Management System for managing customers, items, invoices,
 * PDF Invoice Generation
 * Payment Status Tracking
 * Dashboard Analytics
+* Flash Messages
 * Redis Caching
-* Automated Notifications using APScheduler
+* Background Tasks using Celery
+* Scheduled Notifications using Celery Beat
 * Responsive UI with Bulma CSS
 
 ## Tech Stack
@@ -23,33 +25,48 @@ A Flask-based Invoice Management System for managing customers, items, invoices,
 * Peewee ORM
 * SQLite
 * Redis
-* APScheduler
+* Celery
+* Celery Beat
 * WeasyPrint
 * Bulma CSS
 
-## Run Locally
+## Run the Project
+
+### Start Redis
 
 ```bash
-git clone https://github.com/ayushkashyap31/flask-invoice-system.git
-
-cd flask-invoice-system
-
-pip install -r requirements.txt
-
 redis-server
+```
 
+### Start Celery Worker
+
+```bash
+celery -A tasks worker --loglevel=info
+```
+
+### Start Celery Beat
+
+```bash
+celery -A celery_app beat --loglevel=info
+```
+
+### Run Flask Application
+
+```bash
 python app.py
 ```
 
-## Dashboard
+## Learning Outcomes
 
-The application provides:
-
-* Total Customers
-* Total Items
-* Total Invoices
-* Unpaid Invoices
-* Revenue Analytics
+* Flask Routing
+* CRUD Operations
+* Template Rendering
+* Database Management with Peewee ORM
+* Redis Caching
+* Background Task Processing with Celery
+* Task Scheduling with Celery Beat
+* PDF Generation
+* Git & GitHub Workflow
 
 ## Author
 
