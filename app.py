@@ -14,14 +14,19 @@ from flask import (
 from peewee import *
 import datetime
 from weasyprint import HTML
-from apscheduler.schedulers.background import (
-    BackgroundScheduler
-)
+
+
+# from apscheduler.schedulers.background import (
+#     BackgroundScheduler
+# )
 
 
 import redis
 
 import json
+
+from tasks import notify_unpaid_invoices
+
 
 
 
@@ -397,9 +402,9 @@ def mark_invoice_paid(invoice_id):
 @app.route("/test-notifications")
 def test_notifications():
 
-    notify_unpaid_invoices()
+    notify_unpaid_invoices.delay()
 
-    return "Notifications Created"
+    return "Notification task sent to Celery"
 
 
 @app.route("/notifications")
@@ -516,20 +521,20 @@ def customer_invoices(customer_id):
 
 
 
-def notify_unpaid_invoices():
+# def notify_unpaid_invoices():
 
-    invoices = Invoice.select()
+#     invoices = Invoice.select()
 
-    for invoice in invoices:
+#     for invoice in invoices:
 
-        if invoice.payment_status == "UNPAID":
+#         if invoice.payment_status == "UNPAID":
 
-            Notification.create(
-                invoice=invoice,
-                message=f"Invoice #{invoice.id} is unpaid"
-            )
+#             Notification.create(
+#                 invoice=invoice,
+#                 message=f"Invoice #{invoice.id} is unpaid"
+#             )
 
-    print("Notifications generated")
+#     print("Notifications generated")
 
 
 
@@ -564,19 +569,19 @@ if __name__ == "__main__":
 
 
     # abhi 1 min h
-    scheduler = BackgroundScheduler()
+    # scheduler = BackgroundScheduler()
 
-    scheduler.add_job(
-        notify_unpaid_invoices,
-        trigger="interval",
-        minutes=1
+    # scheduler.add_job(
+    #     notify_unpaid_invoices,
+    #     trigger="interval",
+    #     minutes=1
 
-        # trigger="cron",
-        # day=3,
-        # hour=9,
-        # minute=0
-    )
+    #     # trigger="cron",
+    #     # day=3,
+    #     # hour=9,
+    #     # minute=0
+    # )
 
-    scheduler.start()
+    # scheduler.start()
 
     app.run(debug=True)
