@@ -1,157 +1,492 @@
 <!DOCTYPE html>
+
 <html>
+
 <head>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-        }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+<meta charset="UTF-8">
 
-        .invoice-info {
-            margin-bottom: 25px;
-        }
+<style>
 
-        .invoice-info p {
-            margin: 6px 0;
-        }
+    body {
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+        font-family: Arial, sans-serif;
 
-        table,
-        th,
-        td {
-            border: 1px solid #000;
-        }
+        color: #333;
 
-        th {
-            background-color: #f3f3f3;
-        }
+        margin: 40px;
 
-        th,
-        td {
-            padding: 10px;
-            text-align: left;
-        }
+        line-height: 1.5;
 
-        .total {
-            margin-top: 20px;
-            text-align: right;
-            font-size: 18px;
-            font-weight: bold;
-        }
+    }
 
-        .invoice-number {
-            text-align: right;
-            margin-bottom: 20px;
-        }
-    </style>
+    .top-bar {
+
+        height: 8px;
+
+        background: #16a34a;
+
+        margin-bottom: 25px;
+
+    }
+
+    .header {
+
+        width: 100%;
+
+        margin-bottom: 40px;
+
+    }
+
+    .header table {
+
+        width: 100%;
+
+        border: none;
+
+    }
+
+    .header td {
+
+        border: none;
+
+        padding: 0;
+
+        vertical-align: top;
+
+    }
+
+    .company-name {
+
+        font-size: 42px;
+
+        font-weight: bold;
+
+        color: #111827;
+
+    }
+
+    .invoice-title {
+
+        text-align: right;
+
+    }
+
+    .invoice-title h1 {
+
+        margin: 0;
+
+        font-size: 42px;
+
+        color: #111827;
+
+    }
+
+    .invoice-number {
+
+        color: #6b7280;
+
+        font-size: 16px;
+
+    }
+
+    .info-section {
+
+        width: 100%;
+
+        margin-bottom: 35px;
+
+    }
+
+    .info-section table {
+
+        width: 100%;
+
+        border: none;
+
+    }
+
+    .info-section td {
+
+        border: none;
+
+        vertical-align: top;
+
+        padding: 0;
+
+    }
+
+    .section-label {
+
+        color: #9ca3af;
+
+        font-size: 12px;
+
+        font-weight: bold;
+
+        text-transform: uppercase;
+
+        margin-bottom: 8px;
+
+    }
+
+    .customer-name {
+
+        font-size: 24px;
+
+        font-weight: bold;
+
+        margin-bottom: 5px;
+
+    }
+
+    .status {
+
+        font-weight: bold;
+
+    }
+
+    .paid {
+
+        color: #16a34a;
+
+    }
+
+    .unpaid {
+
+        color: #dc2626;
+
+    }
+
+    table {
+
+        width: 100%;
+
+        border-collapse: collapse;
+
+    }
+
+    .items-table {
+
+        margin-top: 20px;
+
+    }
+
+    .items-table thead {
+
+        background: #f3f4f6;
+
+    }
+
+    .items-table th {
+
+        text-align: left;
+
+        padding: 12px;
+
+        font-size: 14px;
+
+        color: #374151;
+
+        border-bottom: 2px solid #d1d5db;
+
+    }
+
+    .items-table td {
+
+        padding: 12px;
+
+        border-bottom: 1px solid #e5e7eb;
+
+    }
+
+    .summary {
+
+        width: 320px;
+
+        margin-left: auto;
+
+        margin-top: 30px;
+
+    }
+
+    .summary table {
+
+        width: 100%;
+
+    }
+
+    .summary td {
+
+        padding: 8px 0;
+
+        border: none;
+
+    }
+
+    .summary .amount {
+
+        text-align: right;
+
+    }
+
+    .grand-total {
+
+        border-top: 2px solid #d1d5db;
+
+        font-size: 24px;
+
+        font-weight: bold;
+
+    }
+
+    .footer {
+
+        margin-top: 70px;
+
+        text-align: center;
+
+        color: #6b7280;
+
+        font-size: 14px;
+
+    }
+
+</style>
+
 
 </head>
 
 <body>
 
-    <h1>INVOICE</h1>
 
-    <div class="invoice-number">
-        <strong>Invoice #{{ invoice.id }}</strong>
-    </div>
+<div class="top-bar"></div>
 
-    <div class="invoice-info">
-
-        <p>
-            <strong>Customer:</strong>
-            {{ invoice.customer.first_name }}
-            {{ invoice.customer.last_name }}
-        </p>
-
-        <p>
-            <strong>Phone:</strong>
-            {{ invoice.customer.phone }}
-        </p>
-
-        <p>
-            <strong>Status:</strong>
-            {{ invoice.payment_status }}
-        </p>
-        
-        <p>
-            <strong>Date:</strong>
-            {{ invoice.invoice_date.strftime('%d-%m-%Y') }}
-        </p>
-
-    </div>
+<div class="header">
 
     <table>
 
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Unit Price</th>
-                <th>Quantity</th>
-                <th>Line Total</th>
-            </tr>
-        </thead>
+        <tr>
 
-        <tbody>
+            <td>
 
-            {% for item in invoice.items %}
+                <div class="company-name">
 
-            <tr>
+                    KoreCent
 
-                <td>
-                    {{ item.item.item_name }}
-                </td>
+                </div>
 
-                <td>
-                    ₹{{ item.item.price }}
-                </td>
+            </td>
 
-                <td>
-                    {{ item.quantity }}
-                </td>
+            <td class="invoice-title">
 
-                <td>
-                    ₹{{ item.line_total }}
-                </td>
+                <h1>INVOICE</h1>
 
-            </tr>
+                <div class="invoice-number">
 
-            {% endfor %}
+                    #INV-{{ invoice.id }}
 
-        </tbody>
+                </div>
+
+            </td>
+
+        </tr>
 
     </table>
 
-    <div class="total">
+</div>
 
-    <p>
-        Subtotal:
-        ₹{{ invoice.subtotal }}
-    </p>
+<div class="info-section">
 
-    <p>
-        Tax ({{ invoice.tax_percentage }}%):
-        ₹{{ invoice.tax_amount }}
-    </p>
-    
-    
+    <table>
 
-    <h3>
-        Grand Total:
-        ₹{{ invoice.total_price }}
-    </h3>
+        <tr>
 
-    </div>
+            <td width="60%">
+
+                <div class="section-label">
+
+                    Billed To
+
+                </div>
+
+                <div class="customer-name">
+
+                    {{ invoice.customer.first_name }}
+                    {{ invoice.customer.last_name }}
+
+                </div>
+
+                <div>
+
+                    {{ invoice.customer.phone }}
+
+                </div>
+
+            </td>
+
+            <td align="right">
+
+                <div class="section-label">
+
+                    Date of Issue
+
+                </div>
+
+                <div>
+
+                    {{ invoice.invoice_date.strftime('%d %b %Y') }}
+
+                </div>
+
+                <br>
+
+                <div class="section-label">
+
+                    Status
+
+                </div>
+
+                <div class="status
+                    {% if invoice.payment_status == 'PAID' %}
+                        paid
+                    {% else %}
+                        unpaid
+                    {% endif %}
+                ">
+
+                    {{ invoice.payment_status }}
+
+                </div>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+<table class="items-table">
+
+    <thead>
+
+        <tr>
+
+            <th>Item</th>
+
+            <th>Quantity</th>
+
+            <th>Unit Price</th>
+
+            <th>Total</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        {% for item in invoice.items %}
+
+        <tr>
+
+            <td>
+
+                {{ item.item.item_name }}
+
+            </td>
+
+            <td>
+
+                {{ item.quantity }}
+
+            </td>
+
+            <td>
+
+                ₹{{ item.item.price }}
+
+            </td>
+
+            <td>
+
+                ₹{{ item.line_total }}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+<div class="summary">
+
+    <table>
+
+        <tr>
+
+            <td>
+
+                Subtotal
+
+            </td>
+
+            <td class="amount">
+
+                ₹{{ invoice.subtotal }}
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td>
+
+                Tax ({{ invoice.tax_percentage }}%)
+
+            </td>
+
+            <td class="amount">
+
+                ₹{{ invoice.tax_amount }}
+
+            </td>
+
+        </tr>
+
+        <tr class="grand-total">
+
+            <td>
+
+                Total Due
+
+            </td>
+
+            <td class="amount">
+
+                ₹{{ invoice.total_price }}
+
+            </td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+<div class="footer">
+
+    Thank you for your Order!
+
+</div>
+
 
 </body>
+
 </html>
